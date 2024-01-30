@@ -1,0 +1,21 @@
+{
+  "helloWorld": "Hello World!",
+  "@helloWorld": {
+    "description": "The conventional newborn programmer greeting"
+  },
+
+  "@ButtonLabels": {},
+  "nextCtaLabel": "Next",
+  "skipCtaLabel": "Skip",
+
+  "@introPageContent": {},
+  "introTitle0": "Fast & Secure",
+  "introTitle1": "Send money to",
+  "introTitle2": "Managing your account is",
+  "introDescription0": "Payments",
+  "introDescription1": "Anyone at Anytime",
+  "introDescription2": "Easier than it ever was",
+  "getStartedButtonLabel": "Get started"
+
+  
+}
