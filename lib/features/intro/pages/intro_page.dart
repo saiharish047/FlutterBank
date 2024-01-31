@@ -145,8 +145,8 @@ class _IntroScreenState extends State<IntroScreen> {
 
   Widget _indicators() {
     return IndicatorWidget(
-      currentIndex: _current,
       listData: _Constants.images,
+      currentIndex: _current,
     );
   }
 
@@ -158,57 +158,55 @@ class _IntroScreenState extends State<IntroScreen> {
   }
 
   Widget getButtons(BuildContext ctx) {
-    final screenType = ctx.read<IntroBloc>().state.screenType;
-    switch (screenType) {
-      case ScreenType.finalPage:
-        return _commonCta(ctx,
-            onPressed: onSkipPressed,
-            text: AppLocalizations.of(context)!.getStartedButtonLabel,
-            containerColor: ColorPalettes.color75A29F,
-            iconData: const Icon(
-              Icons.arrow_forward_ios,
-              color: (ColorPalettes.colorE4BE8F),
-              size: 14,
-            ));
-      case ScreenType.intermediatePage:
-        return Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            _commonCta(ctx,
-                onPressed: onBackPressed,
-                iconData: const Icon(
-                  Icons.arrow_back_ios,
-                  color: (ColorPalettes.colorE4BE8F),
-                  size: 14,
-                )),
-            _commonCta(ctx,
-                onPressed: onNextPressed,
-                containerColor: ColorPalettes.color75A29F,
-                text: AppLocalizations.of(context)!.nextCtaLabel,
-                iconData: const Icon(
-                  Icons.arrow_forward_ios,
-                  color: (ColorPalettes.colorE4BE8F),
-                  size: 14,
-                )),
-          ],
-        );
-
-      default:
-        return Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            _skipCta(ctx, onSkipPressed),
-            _commonCta(ctx,
-                onPressed: onNextPressed,
-                containerColor: ColorPalettes.color75A29F,
-                text: AppLocalizations.of(context)!.nextCtaLabel,
-                iconData: const Icon(
-                  Icons.arrow_forward_ios,
-                  color: (ColorPalettes.colorE4BE8F),
-                  size: 14,
-                )),
-          ],
-        );
+    final state = ctx.read<IntroBloc>().state;
+    if (state is IntermediateIntroState) {
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          _commonCta(ctx,
+              onPressed: onBackPressed,
+              iconData: const Icon(
+                Icons.arrow_back_ios,
+                color: (ColorPalettes.colorE4BE8F),
+                size: 14,
+              )),
+          _commonCta(ctx,
+              onPressed: onNextPressed,
+              containerColor: ColorPalettes.color75A29F,
+              text: AppLocalizations.of(context)!.nextCtaLabel,
+              iconData: const Icon(
+                Icons.arrow_forward_ios,
+                color: (ColorPalettes.colorE4BE8F),
+                size: 14,
+              )),
+        ],
+      );
+    } else if (state is FinalIntroState) {
+      return _commonCta(ctx,
+          onPressed: onSkipPressed,
+          text: AppLocalizations.of(context)!.getStartedButtonLabel,
+          containerColor: ColorPalettes.color75A29F,
+          iconData: const Icon(
+            Icons.arrow_forward_ios,
+            color: (ColorPalettes.colorE4BE8F),
+            size: 14,
+          ));
+    } else {
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          _skipCta(ctx, onSkipPressed),
+          _commonCta(ctx,
+              onPressed: onNextPressed,
+              containerColor: ColorPalettes.color75A29F,
+              text: AppLocalizations.of(context)!.nextCtaLabel,
+              iconData: const Icon(
+                Icons.arrow_forward_ios,
+                color: (ColorPalettes.colorE4BE8F),
+                size: 14,
+              )),
+        ],
+      );
     }
   }
 
@@ -251,12 +249,13 @@ class _IntroScreenState extends State<IntroScreen> {
   }) {
     return CommonButton(
       attributes: CommonButtonAttributes(
-          onPressed: onPressed,
-          text: text,
-          icon: icon,
-          iconData: iconData,
-          containerColor: containerColor,
-          style: style),
+        text: text,
+        icon: icon,
+        iconData: iconData,
+        containerColor: containerColor,
+        style: style,
+        onPressed: onPressed,
+      ),
     );
   }
 

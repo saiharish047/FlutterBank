@@ -9,23 +9,26 @@ part 'intro_state.dart';
 
 class IntroBloc extends Bloc<IntroEvent, IntroState> {
   late int pageLength;
-  IntroBloc() : super(const IntroState(pageIndex: 0,screenType: ScreenType.initialPage)) {
+  IntroBloc() : super(const InitialIntroState()) {
+    on<PageLoadEvent>(
+      (event, emit) {
+        debugPrint('page load event');
+        pageLength = event.pageLength;
+        emit(const InitialIntroState());
+      },
+    );
 
-    on<PageLoadEvent>((event, emit) {
-      debugPrint('page load event');
-      pageLength = event.pageLength;
-      emit(const IntroState(screenType: ScreenType.initialPage,pageIndex: 0));
-    },);
-
-    on<PageChangedEvent>((event, emit) {
-      debugPrint('page changed event');
-      if(event.index == 0){
-        emit(IntroState(screenType: ScreenType.initialPage,pageIndex: event.index));
-      }else if(event.index == pageLength - 1){
-        emit(IntroState(screenType: ScreenType.finalPage,pageIndex: event.index));
-      }else{
-        emit(IntroState(screenType: ScreenType.intermediatePage,pageIndex: event.index));
-      }
-    },);
+    on<PageChangedEvent>(
+      (event, emit) {
+        debugPrint('page changed event');
+        if (event.index == 0) {
+          emit(const InitialIntroState());
+        } else if (event.index == pageLength - 1) {
+          emit(FinalIntroState(newPageIndex: event.index));
+        } else {
+          emit(IntermediateIntroState(newPageIndex: event.index));
+        }
+      },
+    );
   }
 }
