@@ -1,4 +1,5 @@
 import 'package:bank/features/login/bloc/login_bloc.dart';
+import 'package:bank/features/login/widget/common_textfield.dart';
 import 'package:bank/themes/color_palettes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,15 +19,17 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
       body: BlocBuilder<LoginBloc, LoginState>(
         builder: ((ctx, state) {
           return Padding(
-            padding: const EdgeInsets.only(top: 83,left: 20,right: 20),
+            padding: const EdgeInsets.only(top: 83, left: 20, right: 20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-              _title(context), 
-              Align(
-                alignment: Alignment.center,
-                child:  _buttons(ctx),)
-             ],
+                _title(context),
+                _credentials(ctx),
+                Align(
+                  alignment: Alignment.center,
+                  child: _buttons(ctx),
+                )
+              ],
             ),
           );
         }),
@@ -36,7 +39,7 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
 
   _title(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top:10.0,bottom: 10),
+      padding: const EdgeInsets.only(top: 10.0, bottom: 10),
       child: Text(
         AppLocalizations.of(context)!.loginPageTitle,
         style: Theme.of(context)
@@ -48,11 +51,39 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
   }
 
   _credentials(BuildContext ctx) {
-    return Column(
-      children: [
-        _textField(),
-        _textField(),
-      ],
+    return Padding(
+      padding: const EdgeInsets.only(top: 70, bottom: 46),
+      child: Column(
+        children: [
+          CommonTextField(
+            attributes: CommonTextFieldAttributes(
+                hint:
+                    AppLocalizations.of(context)!.loginPageEmailTextFieldLabel,
+                topLabel: AppLocalizations.of(context)!.loginPageEmailLabel,
+                onSubmitted: (val) {},
+                onChange: (val) {},
+                textfieldType: TextFieldType.email,
+                prefixIconPath: 'assets/images/email.png'),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          CommonTextField(
+            attributes: CommonTextFieldAttributes(
+                hint: AppLocalizations.of(context)!
+                    .loginPagePasswordTextFieldLabel,
+                topLabel: AppLocalizations.of(context)!.loginPagePasswordLabel,
+                onSubmitted: (val) {},
+                onChange: (val) {},
+                textfieldType: TextFieldType.password,
+                sufficIconPath: 'assets/images/password_icon.png',
+                prefixIconPath: 'assets/images/passwordFieldIcon.png'),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+        ],
+      ),
     );
   }
 
@@ -130,6 +161,6 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
       ],
     );
   }
-  
+
   _textField() {}
 }

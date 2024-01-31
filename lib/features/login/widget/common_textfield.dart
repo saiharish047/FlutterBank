@@ -1,5 +1,6 @@
 import 'package:bank/themes/color_palettes.dart';
 import 'package:flutter/material.dart';
+import 'package:bank/features/core/extensions/object_extensions.dart';
 
 enum TextFieldType {
   password,
@@ -68,6 +69,7 @@ class _CommonTextFieldState extends State<CommonTextField> {
           height: 8,
         ),
         TextField(
+          obscureText: _obscurePassword,
           onChanged: (val) {
             widget.attributes.onChange?.call(val);
           },
@@ -76,32 +78,44 @@ class _CommonTextFieldState extends State<CommonTextField> {
           },
           controller: widget.attributes.controller,
           decoration: InputDecoration(
-            errorText: widget.attributes.errorMessage,
-            errorStyle: Theme.of(context)
-                .textTheme
-                .headlineSmall
-                ?.copyWith(color: ColorPalettes.colorC33C29),
-            suffixIcon: GestureDetector(
-              onTap: () {
-                widget.attributes.sufficIconTap?.call();
-              },
-              child: Image.asset(
-                widget.attributes.sufficIconPath ?? '',
+              isDense: true,
+              fillColor: ColorPalettes.colorF6F6F6,
+              filled: true,
+              border: InputBorder.none,
+              errorText: widget.attributes.errorMessage,
+              errorStyle: Theme.of(context)
+                  .textTheme
+                  .headlineSmall
+                  ?.copyWith(color: ColorPalettes.colorC33C29),
+              suffixIcon: widget.attributes.sufficIconPath.isEmptyOrNull
+                  ? null
+                  : GestureDetector(
+                      onTap: () {
+                        if (widget.attributes.textfieldType ==
+                            TextFieldType.password) {
+                          setState(() {
+                            _obscurePassword = !_obscurePassword;
+                          });
+                        } else {
+                          widget.attributes.sufficIconTap?.call();
+                        }
+                      },
+                      child: Image.asset(
+                        widget.attributes.sufficIconPath ?? '',
+                      ),
+                    ),
+              prefixIcon: Image.asset(
+                widget.attributes.prefixIconPath ?? '',
+                width: 2,
+                height: 2,
               ),
-            ),
-            prefix: Image.asset(widget.attributes.prefixIconPath ?? ''),
-            fillColor: ColorPalettes.colorF6F6F6,
-            hintText: widget.attributes.hint,
-          ),
+              hintText: widget.attributes.hint,
+              hintStyle: Theme.of(context)
+                  .textTheme
+                  .headlineSmall
+                  ?.copyWith(color: ColorPalettes.colorA0A0A0)),
         ),
       ],
     );
-  }
-
-  bool obscureText() {
-    if (widget.attributes.textfieldType == TextFieldType.password) {
-      return _obscurePassword;
-    }
-    return false;
   }
 }
