@@ -8,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/route_manager.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:bank/features/login/bloc/login_bloc.dart';
 
 void main() {
   registerDependencies();
@@ -18,9 +19,10 @@ void registerDependencies() {
   GlobalModules.registerDependencies();
 }
 
-List<BlocProvider> _registerBlocProviders(){
+List<BlocProvider> _registerBlocProviders() {
   return [
-    BlocProvider<IntroBloc>(create: (context) => IntroBloc())
+    BlocProvider<IntroBloc>(create: (context) => IntroBloc()),
+    BlocProvider<LoginBloc>(create: (context) => LoginBloc())
   ];
 }
 
@@ -33,18 +35,14 @@ class MyApp extends StatelessWidget {
       providers: _registerBlocProviders(),
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          textTheme: TextThemes().lightTheme
-        ),
+        theme: ThemeData(textTheme: TextThemes().lightTheme),
         localizationsDelegates: const [
           AppLocalizations.delegate,
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
         ],
-        supportedLocales: const [
-          Locale('en')
-        ],
+        supportedLocales: const [Locale('en')],
         navigatorKey: NavigationManager.navigatorKey,
         onGenerateRoute: NavigationManager.getRoute,
         title: 'Totally Real Bank',

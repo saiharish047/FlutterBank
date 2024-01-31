@@ -1,23 +1,16 @@
 part of 'intro_bloc.dart';
 
+enum ScreenType {
+  initialPage,
+  intermediatePage,
+  finalPage,
+}
+
 @immutable
 class IntroState {
   final int? pageIndex;
   final int? pageLength;
-  const IntroState({this.pageIndex, this.pageLength = 0});
-}
+  final ScreenType? screenType;
 
-class InitialIntroState extends IntroState {
-  const InitialIntroState() : super(pageIndex: 0);
-}
-
-class IntermediateIntroState extends IntroState{
-  @override
-  final int pageIndex;
-  const IntermediateIntroState({required this.pageIndex}) : super(pageIndex: pageIndex);
-}
-
-class FinalIntroState extends IntroState{
-  final int pageIndex;
-  const FinalIntroState({required this.pageIndex}):super(pageIndex: pageIndex);
+  const IntroState({this.pageIndex, this.pageLength = 0,this.screenType});
 }

@@ -34,7 +34,7 @@ class _IntroScreenState extends State<IntroScreen> {
   void initState() {
     _controller = CarouselController();
     final blocProvider = BlocProvider.of<IntroBloc>(context);
-    navigationHandler = IntroScreenNavigationHandler(); 
+    navigationHandler = IntroScreenNavigationHandler();
     blocProvider.add(PageLoadEvent(pageLength: _Constants.images.length));
     super.initState();
   }
@@ -54,7 +54,7 @@ class _IntroScreenState extends State<IntroScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Padding(
-                padding: const EdgeInsets.only(top:150.0),
+                padding: const EdgeInsets.only(top: 150.0),
                 child: _pageView(ctx),
               ),
               Padding(
@@ -63,7 +63,8 @@ class _IntroScreenState extends State<IntroScreen> {
               ),
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.only(bottom: 40,left: 30,right: 30),
+                  padding:
+                      const EdgeInsets.only(bottom: 40, left: 30, right: 30),
                   child: Align(child: _buttons(ctx)),
                 ),
               )
@@ -115,22 +116,25 @@ class _IntroScreenState extends State<IntroScreen> {
                   e,
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top:42.0),
+                  padding: const EdgeInsets.only(top: 42.0),
                   child: Text(
                     carouselContentTitleList[i],
                     style: Theme.of(context)
                         .textTheme
                         .displayMedium
                         ?.copyWith(color: ColorPalettes.colorC33C29),
-                        textAlign: TextAlign.center,
+                    textAlign: TextAlign.center,
                   ),
                 ),
                 Expanded(
-                  child: Text(carouselContentDescriptionList[i],
-                      style: Theme.of(context)
-                          .textTheme
-                          .displayLarge
-                          ?.copyWith(color: ColorPalettes.colorC33C29),textAlign: TextAlign.center,),
+                  child: Text(
+                    carouselContentDescriptionList[i],
+                    style: Theme.of(context)
+                        .textTheme
+                        .displayLarge
+                        ?.copyWith(color: ColorPalettes.colorC33C29),
+                    textAlign: TextAlign.center,
+                  ),
                 ),
               ],
             ))
@@ -163,55 +167,57 @@ class _IntroScreenState extends State<IntroScreen> {
   }
 
   Widget getButtons(BuildContext ctx) {
-    final state = ctx.read<IntroBloc>().state;
-    if (state is IntermediateIntroState) {
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          _commonCta(ctx,
-              onPressed: onBackPressed,
-              iconData: const Icon(
-                Icons.arrow_back_ios,
-                color: (ColorPalettes.colorE4BE8F),
-                size: 14,
-              )),
-          _commonCta(ctx,
-              onPressed: onNextPressed,
-              containerColor: ColorPalettes.color75A29F,
-              text: AppLocalizations.of(context)!.nextCtaLabel,
-              iconData: const Icon(
-                Icons.arrow_forward_ios,
-                color: (ColorPalettes.colorE4BE8F),
-                size: 14,
-              )),
-        ],
-      );
-    } else if (state is FinalIntroState) {
-      return _commonCta(ctx,
-          onPressed: onSkipPressed,
-          text: AppLocalizations.of(context)!.getStartedButtonLabel,
-          containerColor: ColorPalettes.color75A29F,
-          iconData: const Icon(
-            Icons.arrow_forward_ios,
-            color: (ColorPalettes.colorE4BE8F),
-            size: 14,
-          ));
-    } else {
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          _skipCta(ctx, onSkipPressed),
-          _commonCta(ctx,
-              onPressed: onNextPressed,
-              containerColor:ColorPalettes.color75A29F,
-              text: AppLocalizations.of(context)!.nextCtaLabel,
-              iconData: const Icon(
-                Icons.arrow_forward_ios,
-                color: (ColorPalettes.colorE4BE8F),
-                size: 14,
-              )),
-        ],
-      );
+    final screenType = ctx.read<IntroBloc>().state.screenType;
+    switch (screenType) {
+      case ScreenType.finalPage:
+        return _commonCta(ctx,
+            onPressed: onSkipPressed,
+            text: AppLocalizations.of(context)!.getStartedButtonLabel,
+            containerColor: ColorPalettes.color75A29F,
+            iconData: const Icon(
+              Icons.arrow_forward_ios,
+              color: (ColorPalettes.colorE4BE8F),
+              size: 14,
+            ));
+      case ScreenType.intermediatePage:
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            _commonCta(ctx,
+                onPressed: onBackPressed,
+                iconData: const Icon(
+                  Icons.arrow_back_ios,
+                  color: (ColorPalettes.colorE4BE8F),
+                  size: 14,
+                )),
+            _commonCta(ctx,
+                onPressed: onNextPressed,
+                containerColor: ColorPalettes.color75A29F,
+                text: AppLocalizations.of(context)!.nextCtaLabel,
+                iconData: const Icon(
+                  Icons.arrow_forward_ios,
+                  color: (ColorPalettes.colorE4BE8F),
+                  size: 14,
+                )),
+          ],
+        );
+
+      default:
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            _skipCta(ctx, onSkipPressed),
+            _commonCta(ctx,
+                onPressed: onNextPressed,
+                containerColor: ColorPalettes.color75A29F,
+                text: AppLocalizations.of(context)!.nextCtaLabel,
+                iconData: const Icon(
+                  Icons.arrow_forward_ios,
+                  color: (ColorPalettes.colorE4BE8F),
+                  size: 14,
+                )),
+          ],
+        );
     }
   }
 
@@ -226,7 +232,13 @@ class _IntroScreenState extends State<IntroScreen> {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          Text(AppLocalizations.of(context)!.skipCtaLabel,style: Theme.of(context).textTheme.headlineMedium?.copyWith(color: ColorPalettes.color75A29F),),
+          Text(
+            AppLocalizations.of(context)!.skipCtaLabel,
+            style: Theme.of(context)
+                .textTheme
+                .headlineMedium
+                ?.copyWith(color: ColorPalettes.color75A29F),
+          ),
           const Icon(
             Icons.arrow_forward_ios,
             color: ColorPalettes.colorE4BE8F,
@@ -259,7 +271,11 @@ class _IntroScreenState extends State<IntroScreen> {
             children: [
               Text(
                 text ?? '',
-                style: style ?? Theme.of(context).textTheme.headlineMedium?.copyWith(color: ColorPalettes.colorFFFFFF),
+                style: style ??
+                    Theme.of(context)
+                        .textTheme
+                        .headlineMedium
+                        ?.copyWith(color: ColorPalettes.colorFFFFFF),
               ),
               if (icon?.isNotEmpty ?? false) Image.asset(icon ?? ''),
               if (iconData != null) iconData

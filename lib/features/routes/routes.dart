@@ -13,9 +13,7 @@ class GlobalRouteManager extends IRouteManager{
     switch(settings.name){
       case splashView:
         return const SplashWidget();
-      case loginView:
-        final arguments = settings.arguments ?? {};
-        
+      case loginView:        
         return const LoginScreenWidget();
       case introView:
         return const IntroScreen();
