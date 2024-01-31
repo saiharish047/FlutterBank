@@ -1,6 +1,8 @@
 import 'package:bank/features/core/extensions/list_extensions.dart';
 import 'package:bank/features/intro/bloc/intro_bloc.dart';
 import 'package:bank/features/intro/navigation_handler/intro_screen_navigation_handler.dart';
+import 'package:bank/features/intro/widgets/button_widget.dart';
+import 'package:bank/features/intro/widgets/indicator_widget.dart';
 import 'package:bank/themes/color_palettes.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -142,21 +144,10 @@ class _IntroScreenState extends State<IntroScreen> {
   }
 
   Widget _indicators() {
-    return Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: _Constants.images.asMap().entries.map((entry) {
-          return Container(
-            width: 8.0,
-            height: 8.0,
-            margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
-            decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: (Theme.of(context).brightness == Brightness.dark
-                        ? (ColorPalettes.indicatorDBB789)
-                        : (ColorPalettes.indicatorC33C29))
-                    .withOpacity(_current == entry.key ? 0.9 : 0.4)),
-          );
-        }).toList());
+    return IndicatorWidget(
+      currentIndex: _current,
+      listData: _Constants.images,
+    );
   }
 
   Widget _buttons(BuildContext ctx) {
@@ -258,31 +249,14 @@ class _IntroScreenState extends State<IntroScreen> {
     TextStyle? style,
     Function? onPressed,
   }) {
-    return GestureDetector(
-      onTap: () {
-        onPressed?.call(context);
-      },
-      child: IntrinsicWidth(
-        child: Container(
-          padding: const EdgeInsets.fromLTRB(13, 7, 13, 7),
-          decoration: ShapeDecoration(
-              shape: const StadiumBorder(), color: containerColor),
-          child: Row(
-            children: [
-              Text(
-                text ?? '',
-                style: style ??
-                    Theme.of(context)
-                        .textTheme
-                        .headlineMedium
-                        ?.copyWith(color: ColorPalettes.colorFFFFFF),
-              ),
-              if (icon?.isNotEmpty ?? false) Image.asset(icon ?? ''),
-              if (iconData != null) iconData
-            ],
-          ),
-        ),
-      ),
+    return CommonButton(
+      attributes: CommonButtonAttributes(
+          onPressed: onPressed,
+          text: text,
+          icon: icon,
+          iconData: iconData,
+          containerColor: containerColor,
+          style: style),
     );
   }
 
