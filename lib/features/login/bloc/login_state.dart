@@ -4,3 +4,5 @@ part of 'login_bloc.dart';
 class LoginState {}
 
 class LoginInitial extends LoginState {}
+
+class LoginError extends LoginState{}

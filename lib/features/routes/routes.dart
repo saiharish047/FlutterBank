@@ -1,6 +1,6 @@
 import 'package:bank/features/core/navigation_manager/navigation_manager.dart';
 import 'package:bank/features/intro/pages/intro_page.dart';
-import 'package:bank/features/login/widget/login_widget.dart';
+import 'package:bank/features/login/page/login_view.dart';
 import 'package:bank/features/splash/widget/splash_widget.dart';
 import 'package:flutter/widgets.dart';
 

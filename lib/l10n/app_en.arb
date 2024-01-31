@@ -7,6 +7,9 @@
   "@ButtonLabels": {},
   "nextCtaLabel": "Next",
   "skipCtaLabel": "Skip",
+  "loginCtaLabel": "Log in",
+  "createAccountCtaLabel": "Create Account",
+  "fingerPrintCtaLabel": "Use fingerprint to log in",
 
   "@introPageContent": {},
   "introTitle0": "Fast & Secure",
@@ -15,7 +18,12 @@
   "introDescription0": "Payments",
   "introDescription1": "Anyone at Anytime",
   "introDescription2": "Easier than it ever was",
-  "getStartedButtonLabel": "Get started"
+  "getStartedButtonLabel": "Get started",
 
-  
+  "@loginPageContent": {},
+  "loginPageTitle": "Log in",
+  "loginPageEmailLabel": "Email Address",
+  "loginPagePasswordLabel": "Password",
+  "loginPageEmailTextFieldLabel": "Enter Email",
+  "loginPagePasswordTextFieldLabel": "Enter Password"
 }
