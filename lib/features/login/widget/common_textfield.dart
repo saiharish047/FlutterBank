@@ -83,6 +83,10 @@ class _CommonTextFieldState extends State<CommonTextField> {
               filled: true,
               border: InputBorder.none,
               errorText: widget.attributes.errorMessage,
+              errorBorder: const OutlineInputBorder(
+                borderSide:
+                    BorderSide(color: ColorPalettes.colorC33C29, width: 1),
+              ),
               errorStyle: Theme.of(context)
                   .textTheme
                   .headlineSmall

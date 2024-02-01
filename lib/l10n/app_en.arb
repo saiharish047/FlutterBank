@@ -4,6 +4,11 @@
     "description": "The conventional newborn programmer greeting"
   },
 
+
+  "@ErrorMessages":{},
+  "emailIdValidationErrorMessage": "Please enter a valid email address",
+  "emptyPasswordErrorMessage": "The Password field cannot be empty",
+
   "@ButtonLabels": {},
   "nextCtaLabel": "Next",
   "skipCtaLabel": "Skip",

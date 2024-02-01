@@ -1,13 +1,22 @@
 part of 'login_bloc.dart';
 
+enum PossibleTextfields { email, password }
+
 @immutable
 class LoginEvent {}
 
-class OnEmailSubmitEvent extends LoginEvent{}
+class OnTextFieldChangeSubmitEvent extends LoginEvent {
+  final String userEnteredText;
+  final PossibleTextfields eventType;
 
-class OnLoginButtonPressEvent extends LoginEvent{}
+  OnTextFieldChangeSubmitEvent({required this.eventType,required this.userEnteredText});
+}
 
-class OnFingerPrintLoginClickEvent extends LoginEvent{}
+class OnLoginButtonPressEvent extends LoginEvent {}
 
-class OnWrongCredentialInputEvent extends LoginEvent{}
+class OnFingerPrintLoginClickEvent extends LoginEvent {}
 
+class OnWrongCredentialInputEvent extends LoginEvent {
+  final PossibleTextfields eventType;
+  OnWrongCredentialInputEvent({required this.eventType});
+}

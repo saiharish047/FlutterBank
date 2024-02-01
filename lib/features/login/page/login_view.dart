@@ -50,6 +50,29 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
     );
   }
 
+  String? errorMessageEmailField(BuildContext context) {
+    final state = context.read<LoginBloc>().state;
+    final errorType = state.errorType;
+    switch (errorType) {
+      case ErrorType.emptyEmail:
+      case ErrorType.wrongEmailFormat:
+        return AppLocalizations.of(context)!.emailIdValidationErrorMessage;
+      default:
+        return null;
+    }
+  }
+
+  String? errorMessageForPasswordField(BuildContext context) {
+    final state = context.read<LoginBloc>().state;
+    final errorType = state.errorType;
+    switch (errorType) {
+      case ErrorType.emptyPassword:
+        return AppLocalizations.of(context)!.emptyPasswordErrorMessage;
+      default:
+        return null;
+    }
+  }
+
   _credentials(BuildContext ctx) {
     return Padding(
       padding: const EdgeInsets.only(top: 70, bottom: 46),
@@ -60,9 +83,14 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                 hint:
                     AppLocalizations.of(context)!.loginPageEmailTextFieldLabel,
                 topLabel: AppLocalizations.of(context)!.loginPageEmailLabel,
-                onSubmitted: (val) {},
+                onSubmitted: (val) {
+                  ctx.read<LoginBloc>().add(OnTextFieldChangeSubmitEvent(
+                      eventType: PossibleTextfields.email,
+                      userEnteredText: val));
+                },
                 onChange: (val) {},
                 textfieldType: TextFieldType.email,
+                errorMessage: errorMessageEmailField(ctx),
                 prefixIconPath: 'assets/images/email.png'),
           ),
           const SizedBox(
@@ -73,10 +101,15 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                 hint: AppLocalizations.of(context)!
                     .loginPagePasswordTextFieldLabel,
                 topLabel: AppLocalizations.of(context)!.loginPagePasswordLabel,
-                onSubmitted: (val) {},
+                onSubmitted: (val) {
+                  ctx.read<LoginBloc>().add(OnTextFieldChangeSubmitEvent(
+                      eventType: PossibleTextfields.password,
+                      userEnteredText: val));
+                },
                 onChange: (val) {},
                 textfieldType: TextFieldType.password,
                 sufficIconPath: 'assets/images/password_icon.png',
+                errorMessage: errorMessageForPasswordField(ctx),
                 prefixIconPath: 'assets/images/passwordFieldIcon.png'),
           ),
           const SizedBox(
