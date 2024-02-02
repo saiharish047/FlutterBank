@@ -13,7 +13,7 @@ enum NavigationType {
 
 abstract class INavigationManager {
   Future<dynamic> navigateTo({
-    required String routeName,
+    String? routeName,
     required NavigationType navigationType,
     Map<String, dynamic>? args,
   }) async {}
@@ -35,26 +35,26 @@ class NavigationManager extends INavigationManager{
 
   @override
   Future<dynamic> navigateTo({
-    required String routeName,
+    String? routeName,
     required NavigationType navigationType,
     Map<String, dynamic>? args,
   }) async {
     dynamic dynamicData;
     switch (navigationType) {
       case NavigationType.push:
-        dynamicData = _push(routeName, args);
+        dynamicData = _push(routeName ?? '', args);
         break;
       case NavigationType.goBack:
         dynamicData = _pop(args);
         break;
       case NavigationType.popUntil:
-        dynamicData = _popUntil(routeName, args);
+        dynamicData = _popUntil(routeName ?? '', args);
         break;
       case NavigationType.replace:
-        dynamicData = _replace(routeName, args);
+        dynamicData = _replace(routeName ?? '', args);
         break;
       case NavigationType.bottomsheet:
-        dynamicData = _bottomSheet(routeName, args);
+        dynamicData = _bottomSheet(routeName ?? '', args);
         break;
       default:
         throw Exception(
@@ -64,6 +64,8 @@ class NavigationManager extends INavigationManager{
 
     return dynamicData;
   }
+
+
 
   dynamic _push(String routeName, dynamic args) {
     return Get.toNamed(routeName, arguments: args);

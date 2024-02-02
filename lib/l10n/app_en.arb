@@ -8,6 +8,7 @@
   "@ErrorMessages":{},
   "emailIdValidationErrorMessage": "Please enter a valid email address",
   "emptyPasswordErrorMessage": "The Password field cannot be empty",
+  "wrongCredentials": "Wrong credentials, please try again",
 
   "@ButtonLabels": {},
   "nextCtaLabel": "Next",
@@ -15,6 +16,7 @@
   "loginCtaLabel": "Log in",
   "createAccountCtaLabel": "Create Account",
   "fingerPrintCtaLabel": "Use fingerprint to log in",
+  "closeCtaLabel": "Close",
 
   "@introPageContent": {},
   "introTitle0": "Fast & Secure",

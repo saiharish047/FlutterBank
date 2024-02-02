@@ -13,8 +13,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc() : super(LoginInitial()) {
     on<LoginEvent>((event, emit) {});
 
-    
-
     on<OnTextFieldChangeSubmitEvent>((event, emit) {
       switch (event.eventType) {
         case PossibleTextfields.email:
@@ -39,6 +37,12 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           break;
       }
     });
+
+    on<OnLoginButtonPressEvent>(
+      (event, emit) {
+        emit(LoginAPIFailure());
+      },
+    );
 
     on<OnWrongCredentialInputEvent>(((event, emit) {
       switch (event.eventType) {
