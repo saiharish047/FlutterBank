@@ -1,4 +1,3 @@
-import 'package:bank/features/login/widget/common_textfield.dart';
 import 'package:bank/themes/color_palettes.dart';
 import 'package:flutter/material.dart';
 
@@ -123,10 +122,12 @@ class _CountryPickerTextFieldState extends State<CountryPickerTextField> {
 
 class CountryPickerTextFieldAttributes {
   final List<CountryImageCodeModel> countries;
-  void Function(CountryImageCodeModel)? onCountryChanged;
+  String topLabel;
+  Function(String?)? onSubmitted;
+  Function(CountryImageCodeModel?)? onCountryChanged;
 
   CountryPickerTextFieldAttributes(
-      {required this.countries, this.onCountryChanged});
+      {required this.countries, required this.topLabel,this.onSubmitted,this.onCountryChanged});
 }
 
 class CountryImageCodeModel {

@@ -1,5 +1,6 @@
 import 'package:bank/features/core/navigation_manager/navigation_manager.dart';
 import 'package:bank/features/login/bloc/login_bloc.dart';
+import 'package:bank/features/login/navigation_handler/login_navigation_handler.dart';
 import 'package:bank/features/login/widget/common_textfield.dart';
 import 'package:bank/themes/color_palettes.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,7 @@ class LoginScreenWidget extends StatefulWidget {
 }
 
 class _LoginScreenWidgetState extends State<LoginScreenWidget> {
+  ILoginNavigationHandler? navigationHandler;
   @override
   void initState() {
     final blocProvider = BlocProvider.of<LoginBloc>(context);
@@ -22,6 +24,7 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
         _errorPopups(context);
       }
     });
+    navigationHandler = LoginNavigationHandler();
     super.initState();
   }
 
@@ -243,6 +246,9 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
           height: 45,
         ),
         GestureDetector(
+          onTap: (){ 
+            navigationHandler?.navigateToSignUp();
+          },
           child: Container(
             width: MediaQuery.sizeOf(context).width - 30,
             height: 60,

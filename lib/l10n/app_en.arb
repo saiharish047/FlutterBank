@@ -35,5 +35,18 @@
   "loginPagePasswordTextFieldLabel": "Enter Password",
 
   "@signupPageContent": {},
-  "signupPagePhoneLabel": "Phone"
+  "signupPageCreateYourAccountLabel": "Create your Account",
+  "signupNameLabel": "Name",
+  "signupNameHintText": "Enter First and Last Name",
+  "signupEmailLabel": "Email Address",
+  "signupEmailHintText": "Enter Email",
+  "signupPagePhoneLabel": "Phone",
+  "signupPasswordLabel": "Password",
+  "signupPasswordHintText": "Enter Password",
+  "signupVerifyPasswordLabel": "Verify Password",
+  "signupVerifyPasswordHintText": "Re-enter Password",
+  "signupAccountNumberLabel": "Account Number",
+  "signupAccountNumberHintText": "Enter Account Number",
+  "signupCreateAccountCtaText": "Create Account",
+  "signupAlreadyHaveAnAccountCtaText": "Already have an account?"
 }
