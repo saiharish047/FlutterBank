@@ -57,6 +57,7 @@ class _CommonTextFieldState extends State<CommonTextField> {
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
           widget.attributes.topLabel ?? '',
@@ -108,11 +109,13 @@ class _CommonTextFieldState extends State<CommonTextField> {
                         widget.attributes.sufficIconPath ?? '',
                       ),
                     ),
-              prefixIcon: Image.asset(
-                widget.attributes.prefixIconPath ?? '',
-                width: 2,
-                height: 2,
-              ),
+              prefixIcon: widget.attributes.prefixIconPath.isEmptyOrNull
+                  ? null
+                  : Image.asset(
+                      widget.attributes.prefixIconPath ?? '',
+                      width: 2,
+                      height: 2,
+                    ),
               hintText: widget.attributes.hint,
               hintStyle: Theme.of(context)
                   .textTheme

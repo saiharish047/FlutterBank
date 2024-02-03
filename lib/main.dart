@@ -1,6 +1,7 @@
 import 'package:bank/features/core/dependency_injection/global_modules.dart';
 import 'package:bank/features/core/navigation_manager/navigation_manager.dart';
 import 'package:bank/features/intro/bloc/intro_bloc.dart';
+import 'package:bank/features/signup/bloc/signup_bloc.dart';
 import 'package:bank/features/splash/widget/splash_widget.dart';
 import 'package:bank/themes/text_themes.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +23,8 @@ void registerDependencies() {
 List<BlocProvider> _registerBlocProviders() {
   return [
     BlocProvider<IntroBloc>(create: (context) => IntroBloc()),
-    BlocProvider<LoginBloc>(create: (context) => LoginBloc())
+    BlocProvider<LoginBloc>(create: (context) => LoginBloc()),
+    BlocProvider<SignupBloc>(create: (context) => SignupBloc()),
   ];
 }
 

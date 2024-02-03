@@ -10,4 +10,5 @@ abstract class ColorPalettes {
   static const colorFFFFFF = Color(0xFFFFFFFF);
   static const colorF6F6F6 = Color(0xFFF6F6F6);
   static const colorA0A0A0 = Color(0xFFA0A0A0);
+  static const colorC4C4C4 = Color(0xFFC4C4C4);
 }

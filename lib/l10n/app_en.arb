@@ -32,5 +32,8 @@
   "loginPageEmailLabel": "Email Address",
   "loginPagePasswordLabel": "Password",
   "loginPageEmailTextFieldLabel": "Enter Email",
-  "loginPagePasswordTextFieldLabel": "Enter Password"
+  "loginPagePasswordTextFieldLabel": "Enter Password",
+
+  "@signupPageContent": {},
+  "signupPagePhoneLabel": "Phone"
 }
